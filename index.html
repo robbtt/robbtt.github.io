@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+	<Script>
+		function calculate() {
+			var cost = document.getElementById("cost").value;
+			var yearsInSchool = document.getElementById("yearsInSchool").value;
+			var percentagePaid = document.getElementById("percentagePaid").value;
+			var armySalary = document.getElementById("armySalary").value;
+			var timeOut = document.getElementById("timeOut").value;
+			var workSalary = document.getElementById("workSalary").value;
+			var incomeTaxPercentage = document.getElementById("incomeTaxPercentage").value;
+
+			var totalCostOfSchool = (cost * yearsInSchool)
+			var percentagePaidDecimal = (100 - percentagePaid) * .01
+			var totalArmy = (totalCostOfSchool * percentagePaidDecimal) - armySalary
+			var totalArmyString = ""
+			if (totalArmy <= 0) {
+				totalArmyString = "left"
+			}
+			else {
+				totalArmyString = "due"
+			}
+
+			var tax = (100 - incomeTaxPercentage) * .01
+			var salaryFromWork = workSalary * timeOut * tax
+			var total =  totalCostOfSchool - salaryFromWork
+			var totalString = ''
+			if (total <= 0) {
+				totalString = "left"
+			}
+			else {
+				totalString = "due"
+			}
+
+			document.getElementById("resultArmy").innerHTML = Math.abs(totalArmy) + " " + totalArmyString;
+			document.getElementById("resultNoArmy").innerHTML = Math.abs(total) + " " + totalString;
+		}
+	</Script>
+
+	<form>
+	Estimated cost of school yearly : <input type="text" id="cost" /><br>
+	Estimated years in school left: <input type="text" id="yearsInSchool" /><br>
+	Percentage paid by army: <input type="text" id="percentagePaid" /><br>
+	Salary for deployment: <input type="text" id="armySalary" /><br>
+	Estimated time out of school in years: <input type="text" id="timeOut" /><br>
+	Estimated yearly work salary after graduating: <input type="text" id="workSalary" /><br>
+	Income Tax Percentage (25% up to $91,400): <input type="text" id="incomeTaxPercentage" /><br>
+
+	<input type="button" onClick="calculate()" Value="Calculate" />
+	</form>
+	<p>Total balance army: $
+	<span id = "resultArmy">
+	</span>
+	</p>
+	<p>Total balance no army: $
+	<span id = "resultNoArmy">
+	</span>
+	</p>
+
+</body>
+</html>
